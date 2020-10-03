@@ -17,6 +17,7 @@ int main(){
     fgets(s2,sizeof(s2),stdin);
     s2[MAX_LENGTH-1] = '0';
 
+    //Result
     printf("\nNice. Ecco ora il risultato della funzione print_after(s1,s2):\n");
     print_after(s1,s2);
     
