@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <string.h>
+#include <math.h>
 
 int get_exponent(double num);
 
@@ -11,9 +11,11 @@ int main(){
 
     //Inputs
     printf("Inserisci un valore double: ");
-    scanf("%lf",&n);
+    scanf("%ld",&n);
 
     //Result
+    int e;
+    double m = frexp(n,&e);
     printf("\nNice. Ecco il suo esponente secondo lo standard IEEE 754-1985: %d\n",get_exponent(n));
 
 }
@@ -21,20 +23,12 @@ int main(){
 
 int get_exponent(double num){
 
-    int i=0;
-    unsigned long int u;
-    unsigned long int d;
-    memcpy(&u,&num,sizeof(num));
-    
+    int exp;
+    double mantissa;
+    //memcpy(data, &num, sizeof(data));
 
-    //Extracting the double exponent
-    
-    for (int i = 0; i < 12; i++)
-    {
-        
-    }
-    
+    mantissa = frexp(num,&exp);
 
-    return u << 52;
+    return exp;
 
 }
