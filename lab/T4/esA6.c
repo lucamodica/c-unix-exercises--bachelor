@@ -1,10 +1,10 @@
 #include <stdio.h>
 
-#define MAX_LENGTH 256
+#define MAX_LENGTH 80
 
 int slength(char s[]);
-//char *scut_last_word(char s[]);
-//int string_is_empty(char s[]);
+char *scut_last_word(char s[]);
+int string_is_empty(char s[]);
 
 
 int main(){
@@ -13,30 +13,23 @@ int main(){
 
     printf("Inserisci Stringa: ");
     fgets(str,sizeof(str),stdin);
-    printf("%s",str);
 
     //Results
     printf("\n1) Lunghezza della stringa: %d",slength(str));
-    //printf("\n2) Stringa senza ultima parola: %s",scut_last_word(str));
-    //printf("\n3) Esito stringa vuota: %d\n",string_is_empty(str));
+    printf("\n2) Stringa senza ultima parola: %s",scut_last_word(str));
+    printf("\n3) Esito stringa vuota: %d\n",string_is_empty(str));
 }
 
 
 int slength(char s[]){
-    int cont = 0;
-    for(char *c = s; *c != '\n' || *c != '\0'; c++){
-        cont++;
-    }
-    return cont;
+    int i;
+    for(i=0; (*(s + i) != '\0') && (*(s + i) != '\n'); i++){  }
+    return i;
 }
 
-/*
 char *scut_last_word(char s[]){
     int i;
-    printf("\n%d",slength(s));
-    for (int i = slength(s); i > 0 && s[i] != ' '; i--){
-        //printf("\n%d",i);
-    }
+    for (i = slength(s); i > 0 && s[i] != ' '; i--){}
     s[i] = '\0';
     return s;
 }
@@ -44,7 +37,6 @@ char *scut_last_word(char s[]){
 int string_is_empty(char s[]){
     return *s == '\n' || *s == '\0';
 }
-*/
 
 
 
