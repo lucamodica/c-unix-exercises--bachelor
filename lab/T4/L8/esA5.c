@@ -1,8 +1,11 @@
 #include <stdio.h>
 
-#define MAX_LENGTH 100
+#define MAX_LENGTH 80
+#define NO_LETTERS ('Z'-'A'+ 1)
 
 void count_char(char str[]);
+void setup(int a[], int range, int st);
+char tolowercase(char c);
 
 
 int main(){
@@ -23,57 +26,57 @@ int main(){
 
 void count_char(char str[]){
 
-    int i=0,j=0;
+    int i=0,wh=0;
 
-    //Arrays where register records
-    char chars[MAX_LENGTH];
-    int times[MAX_LENGTH];
+    //Array where register records
+    int chars[MAX_LENGTH];
 
-    //Setting the first character in chars[]
-    chars[0] = '\0';
+    //Setting chars[] array
+    setup(chars,NO_LETTERS,0);
 
     //Recording characters
-    for(i=0;str[i] != '\0';i++){
+    for(i=0; str[i] != '\0'; i++){
         
         //Checking for the character...
         //(notice that is case insensitive)
-        while ( str[i] != chars[j] && str[i]+32 != chars[j] && chars[j] != '\0'){ 
-            j++; 
-        }
+        char ch = tolowercase((char) str[i]);
         
-        //If is already registered, the times attr will be increased
-        if(str[i] == chars[j] || str[i]+32 == chars[j]){
-            times[j]++;
+        if(ch <= 'z' && ch >= 'a'){
+            chars[ch - 'a']++;
         }
-        //If the char at that position is '\0',
-        //it means that is a new character to be registered
-        if(chars[j] == '\0'){
-            chars[j+1] = chars[j];
-            if(str[i] >= 'A' && str[i] <= 'Z'){ chars[j] = str[i]+32; }
-            else{ chars[j] = str[i]; }
-            times[j] = 1;
+        else if(ch ==' '){
+            wh++;
         }
-        j = 0;
-
-        //if(str[i] >= 'A' && str[i] <= 'Z'){ printf("%c\n",str[i]+32); }
 
     }
+    chars[NO_LETTERS] = wh;
 
     //Printing the recordings as an histogram 
-    for (i = 0; chars[i+1] != '\0'; i++)
-    {
-        //First the character
-        printf("%c: ",chars[i]);
+    for (i = 0; i <= NO_LETTERS; i++){
+    
+        if(chars[i] != 0){
 
-        //Then the times
-        for(j = 0; j < times[i]; j++){
-            printf("*");
-        }
+            //First the character
+            printf("%c: ",(i == NO_LETTERS) ? ' ' : 'a' + i);
 
-        //To the next character found
-        printf("\n");
+            //Then the times
+            for(int j = 0; j < chars[i]; j++){
+                printf("*");
+            }
+
+            //To the next character found
+            printf("\n");
+
+        }    
 
     }
     
+}
 
+void setup(int a[], int range, int st){
+    for (int i = 0; i < range; i++){ a[i] = st; }
+}
+
+char tolowercase(char c){
+    return (c <= 'Z' && c >= 'A') ? c - 'A' + 'a' : c;
 }
