@@ -1,0 +1,2 @@
+char* getNome(){....}
+int getAge(){....}
