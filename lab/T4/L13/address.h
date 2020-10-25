@@ -6,7 +6,7 @@
 typedef enum { NA, IT, FR, DE, UK,  PT } country;
 char *country_name[] = {"No country", "Italy", "France", "Germany", "Great Britain", "Portugal"};
 
-//Address struct
+//Address type
 typedef struct{
     char *street;
     unsigned int nciv;
@@ -16,12 +16,12 @@ typedef struct{
 
 //List funcs (prototype)
 extern char* getStreet(address);
-extern void setStreet(address, char *);
+extern void setStreet(address *, char *);
 extern int getNciv(address);
-extern void setNciv(address, int);
+extern void setNciv(address *, int);
 extern int getCap(address);
-extern void setCap(address, int);
-extern char* getLoc(address);
-extern void setLoc(address, country);
+extern void setCap(address *, int);
+extern country getLoc(address);
+extern void setLoc(address *, country);
 
 #endif
