@@ -20,38 +20,35 @@ int l_length(list_cl l){
 
 //Adding an element to the list
 list_cl l_add_cl(list_cl l, client c){
-    if(l_is_empty(l)){
-        l.head = (l_node *) malloc(sizeof(l_node));
-        l.tail = (l_node *) malloc(sizeof(l_node));
-        l.head->id = 0;
-        l.head->person = c;
-        l.head->next = NULL;
-        l.tail = l.head;
-    }
-    else{
-        //Create new node
-        l_node *n = (l_node *) malloc(sizeof(l_node));
+    l_node *n = (l_node *) malloc(sizeof(l_node));
+
+    if(n!=NULL){
         n->id = l_length(l);
         n->person = c;
         n->next = NULL;
 
-        //Inserting as first tail
-        if(l.tail == l.head){
-            l.tail = n;
-            l.head->next = l.tail;
+        if(l_is_empty(l)){
+            l.head = l.tail = n;
         }
-        //Inserting an element as new tail
         else{
             l.tail->next = n;
             l.tail = n;
         }
     }
+        
     return l;
 }
 
 //Return the client info saved on head node
 client l_rem_cl(list_cl l){
-    return l.head->person;
+    client c = EMPTY_CLIENT;
+    if(l_is_empty(l) == 0){
+        c = l.head->person;
+        l_node *t = l.head;
+        l.head = l.head->next;
+        free(t);
+    }
+    return c;
 }
 
 //Removing all the elements of the list

@@ -1,5 +1,6 @@
 #ifndef _CLIENT_H
 #define _CLIENT_H
+#define EMPTY_CLIENT {0,"","",{"",0,0,NA}}
 
 #include "address.h"
 
