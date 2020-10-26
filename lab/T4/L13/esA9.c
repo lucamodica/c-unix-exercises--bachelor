@@ -1,10 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "list_cl.h"
 #include "list_cl.c"
-#include "client.h"
 #include "client.c"
-#include "address.h"
 #include "address.c"
 
 
