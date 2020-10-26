@@ -21,7 +21,7 @@ typedef struct {
 
 //List operation (prototype)
 extern list_cl l_add_cl(list_cl, client);
-extern client  l_rem_cl(list_cl);
+extern client  l_rem_cl(list_cl *);
 extern int     l_is_empty(list_cl);
 extern list_cl l_clear(list_cl);
 extern int     l_length(list_cl);

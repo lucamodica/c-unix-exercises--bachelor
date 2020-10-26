@@ -40,12 +40,12 @@ list_cl l_add_cl(list_cl l, client c){
 }
 
 //Return the client info saved on head node
-client l_rem_cl(list_cl l){
+client l_rem_cl(list_cl *l){
     client c = EMPTY_CLIENT;
-    if(l_is_empty(l) == 0){
-        c = l.head->person;
-        l_node *t = l.head;
-        l.head = l.head->next;
+    if(l_is_empty(*l) == 0){
+        l_node *t = l->head;
+        c = l->head->person;
+        l->head = l->head->next;
         free(t);
     }
     return c;
@@ -53,7 +53,7 @@ client l_rem_cl(list_cl l){
 
 //Removing all the elements of the list
 list_cl l_clear(list_cl l){
-    l_node *n = NULL;
+    l_node *n;
     l_node *d = l.head;
 
     while(d != NULL){
@@ -63,7 +63,6 @@ list_cl l_clear(list_cl l){
         free(n);
     }
     l.head = EMPTY_LIST;
-    l.tail = EMPTY_LIST;
 
     return l;
 }
