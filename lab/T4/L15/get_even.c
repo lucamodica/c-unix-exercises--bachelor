@@ -20,7 +20,7 @@ typedef node *list; //Punta al nodo "testa" della lista
  * e la funzione restituirà la lista (2,4,0).
  */
 
-list get_even(list);
+list get_even(list *);
 void l_free(list);
 
 int main(){
@@ -30,8 +30,11 @@ int main(){
     l->value = 0;
     l->next = NULL;
 
+    //Generic node pointer
+    node *c;
+
     //Creating the list
-    node *c = l;
+    c = l;
     for(int i = 1; i < 10; i++){
         node *n = (node *) malloc(sizeof(node));
         n->value = i;
@@ -47,16 +50,42 @@ int main(){
         printf("|| %d || ",c->value);
         c = c->next;
     }
-    printf("\n");
+    printf("\n\n");
 
-    //l_cut_at func
-    l = l_cut_at(l,4);
+    //get_even func
+    list even = get_even(&l);
+    printf("**Liste dopo la funzione get_even()**\n");
+
+    //Printing odd list (the old modified one)
+    printf("Dispari: ");
     c = l;
-    printf("Lista dopo il taglio: ");
     while(c != NULL){
         printf("|| %d || ",c->value);
         c = c->next;
     }
     printf("\n");
 
+    //Printing the new even list
+    printf("Pari: ");
+    c = even;
+    while(c != NULL){
+        printf("|| %d || ",c->value);
+        c = c->next;
+    }
+    printf("\n");
+
+}
+
+
+list get_even(list *l){
+
+    //Result list
+    list even = NULL;
+
+    //Func pointer utilities
+    node *c = ;
+
+
+
+    return even; 
 }
