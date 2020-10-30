@@ -20,8 +20,7 @@ typedef node *list; //Punta al nodo "testa" della lista
  * e la funzione restituirà la lista (2,4,0).
  */
 
-list get_even(list *);
-void l_free(list);
+list get_even(list);
 
 int main(){
 
@@ -53,7 +52,7 @@ int main(){
     printf("\n\n");
 
     //get_even func
-    list even = get_even(&l);
+    list even = get_even(l);
     printf("**Liste dopo la funzione get_even()**\n");
 
     //Printing odd list (the old modified one)
@@ -77,13 +76,55 @@ int main(){
 }
 
 
-list get_even(list *l){
+list get_even(list l){
 
     //Result list
     list even = NULL;
+    node *e;
+    node *pe;
 
     //Func pointer utilities
-    node *c = ;
+    node *prec = NULL;
+    node *c = l;
+
+    do{
+        
+        if(c->value%2 == 0){
+            //Creating the first even node
+            if(even == NULL){
+                even = (node *) malloc(sizeof(node *));
+                even->value = c->value;
+                even->next = NULL;
+                e = even;
+                pe = NULL;
+            }
+            //Creating an even node
+            else{
+                pe = e;
+                e = (node *) malloc(sizeof(node *));
+                e->value = c->value;
+                e->next = NULL;
+                pe->next = e; 
+            }
+            //Deleting the first node from the original list
+            if(prec == NULL){
+                prec = c;
+                c = c->next;
+                free(prec);
+            }
+            //Deleting the current node from the original list
+            else{
+                prec->next = c->next;
+                free(c);
+                c = prec->next;
+            }
+        }
+        else{
+            c = prec;
+            c = c->next;
+        }
+
+    }while(c != NULL);
 
 
 
