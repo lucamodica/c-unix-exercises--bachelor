@@ -34,7 +34,7 @@ int main(){
 
     //Creating the list
     c = l;
-    for(int i = 1; i < 10; i++){
+    for(int i = 1; i < 6; i++){
         node *n = (node *) malloc(sizeof(node));
         n->value = i;
         n->next = NULL;
@@ -80,45 +80,43 @@ list get_even(list l){
 
     //Result list
     list even = NULL;
-    node *e;
 
     if(l != NULL){
 
         //Func pointer utilities
         node *prec = NULL;
         node *c = l;
+        node *e;
 
         do{
             if(c->value%2 == 0){
-                //Creating the first even node
+                node *n = (node *) malloc(sizeof(node));
+                n->value = c->value;
+                n->next = NULL;
+                //Point to the first even node
                 if(even == NULL){
-                    even = (node *) malloc(sizeof(node *));
-                    even->value = c->value;
-                    even->next = NULL;
+                    even = n;
                     e = even;
                 }
-                //Creating an even node
+                //Point to a new even node
                 else{
-                    node *n = (node *) malloc(sizeof(node));
-                    n->value = c->value;
-                    n->next = NULL;
                     e->next = n;
                     e = n;
                 }
+
                 //Deleting the first node from the original list
+                n = c;
                 if(prec == NULL){
-                    prec = c;
                     c = c->next;
                     l = c;
-                    free(prec);
-                    prec = NULL;
                 }
                 //Deleting the current node from the original list
                 else{
                     prec->next = c->next;
-                    free(c);
                     c = prec->next;
                 }
+                free(n);
+                n = NULL;
             }
             else{
                 prec = c;
@@ -127,11 +125,12 @@ list get_even(list l){
         }while(c != NULL);
 
         c = l;
+        printf("Lista dispari (ma stampata nella funzione): ");
         while(c != NULL){
             printf("|| %d || ",c->value);
             c = c->next;
         }
-        printf("\n");
+        printf("\n\n");
         
     }
 
