@@ -48,7 +48,7 @@ int main(){
     printf("\n");
 
     //l_cut_at func
-    l = l_cut_at(l,0);
+    l = l_cut_at(l,6);
     c = l;
     printf("Lista dopo il taglio: ");
     while(c != NULL){
@@ -69,7 +69,10 @@ list l_cut_at(list l, int cut_value){
         do{
             if(e->value == cut_value){
                 if(p == NULL){
-                    p = NULL;
+                    l = NULL;
+                }
+                else{
+                    p->next = NULL;
                 }
                 l_free(e);
                 e = NULL;

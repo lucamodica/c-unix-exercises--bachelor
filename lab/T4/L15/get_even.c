@@ -81,52 +81,59 @@ list get_even(list l){
     //Result list
     list even = NULL;
     node *e;
-    node *pe;
 
-    //Func pointer utilities
-    node *prec = NULL;
-    node *c = l;
+    if(l != NULL){
 
-    do{
-        
-        if(c->value%2 == 0){
-            //Creating the first even node
-            if(even == NULL){
-                even = (node *) malloc(sizeof(node *));
-                even->value = c->value;
-                even->next = NULL;
-                e = even;
-                pe = NULL;
+        //Func pointer utilities
+        node *prec = NULL;
+        node *c = l;
+
+        do{
+            if(c->value%2 == 0){
+                //Creating the first even node
+                if(even == NULL){
+                    even = (node *) malloc(sizeof(node *));
+                    even->value = c->value;
+                    even->next = NULL;
+                    e = even;
+                }
+                //Creating an even node
+                else{
+                    node *n = (node *) malloc(sizeof(node));
+                    n->value = c->value;
+                    n->next = NULL;
+                    e->next = n;
+                    e = n;
+                }
+                //Deleting the first node from the original list
+                if(prec == NULL){
+                    prec = c;
+                    c = c->next;
+                    l = c;
+                    free(prec);
+                    prec = NULL;
+                }
+                //Deleting the current node from the original list
+                else{
+                    prec->next = c->next;
+                    free(c);
+                    c = prec->next;
+                }
             }
-            //Creating an even node
             else{
-                pe = e;
-                e = (node *) malloc(sizeof(node *));
-                e->value = c->value;
-                e->next = NULL;
-                pe->next = e; 
-            }
-            //Deleting the first node from the original list
-            if(prec == NULL){
                 prec = c;
                 c = c->next;
-                free(prec);
             }
-            //Deleting the current node from the original list
-            else{
-                prec->next = c->next;
-                free(c);
-                c = prec->next;
-            }
-        }
-        else{
-            c = prec;
+        }while(c != NULL);
+
+        c = l;
+        while(c != NULL){
+            printf("|| %d || ",c->value);
             c = c->next;
         }
-
-    }while(c != NULL);
-
-
+        printf("\n");
+        
+    }
 
     return even; 
 }
