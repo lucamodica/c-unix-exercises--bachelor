@@ -4,6 +4,7 @@
 
 
 #define NUM_FORKS  4
+int n = 0;
 
 int main() {
   int i;
@@ -12,6 +13,7 @@ int main() {
   for (i=0; i<NUM_FORKS; i++) {
 
     value = fork();
+	n++;
     my_pid = getpid();
     my_ppid = getppid();
     printf("PID=%d, PPID=%d, i=%d, fork_value=%d\n", my_pid, my_ppid, i, value);
@@ -19,4 +21,6 @@ int main() {
   }
 
   exit(EXIT_SUCCESS);
+  
+
 }

@@ -43,7 +43,7 @@ int main() {
 
     sleep(5);
 
-    //test_var++;
+    test_var++;
     printf("Parent:test_var = %d\n\n",test_var);
     printf("Parent: p_var = %p\n\n",p_var);
     break;

@@ -22,7 +22,7 @@ int main() {
     my_ppid = getppid();
     printf("CHILD:  PID=%d, PPID=%d, fork_value=%d\n", my_pid, my_ppid, value);
 
-    sleep(60);
+    sleep(10);
     exit(72);
 
   default:
