@@ -38,7 +38,7 @@ int main (void) {
 
 			//exexlp()
 			printf("\nexeclp() INTENSIFIES\n");
-			sleep(3);
+			//sleep(3);
 			execlp("./saluta_persone","","Clown","Felpa arancione",
 			"Giga Chad","Bell'uomo",NULL);
 
@@ -58,7 +58,7 @@ int main (void) {
 		    
 		    //execvp()
 			printf("\nexecvp() INTENSIFIES\n");
-			sleep(3);
+			//sleep(3);
 			execvp("./saluta_persone",args);
 
 			//Don't need to check success. If here not success
