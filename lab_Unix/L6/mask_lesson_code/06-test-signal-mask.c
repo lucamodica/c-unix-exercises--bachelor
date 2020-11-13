@@ -21,7 +21,8 @@ int main()
 
 	/* Blocking SIGINT for the process: if generate, it will be pending */
 	sigemptyset(&my_mask);                  /* set an empty mask */
-	sigaddset(&my_mask, SIGINT);            /* add SIGINT to the mask */
+	sigaddset(&my_mask, SIGINT);           /* add SIGINT to the mask */
+	sigaddset(&my_mask, SIGTERM);           /* add SIGINT to the mask */
 	sigprocmask(SIG_BLOCK, &my_mask, NULL); /* mask SIGINT in the process */
 
 	/* Setting the handler for SIGINT */
@@ -53,6 +54,6 @@ void handle_signal(int signal) {
 	static int count_invocations = 0;
 	
 	count_invocations++;
-	printf("Handling signal #%d (%s): invocation %d\n",
+	printf("\nHandling signal #%d (%s): invocation %d\n",
 	       signal, strsignal(signal), count_invocations);
 }

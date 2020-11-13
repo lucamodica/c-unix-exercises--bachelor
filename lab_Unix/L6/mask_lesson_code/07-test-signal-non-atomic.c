@@ -10,7 +10,7 @@
  * (3) gcc -S -g ...
  */
 
-/*#define WIDE_DATA_MEM*/
+#define WIDE_DATA_MEM
 
 /*
  * The global variable "memory" is used to check if operations are
@@ -54,7 +54,7 @@ int main (void)
 	alarm (1);
 	while (1)
 	{
-#if 1
+#if 0
 		/* SIGALRM may arrive "in the middle" of each assignment */
 		memory = zeros;
 		memory = ones;
