@@ -7,13 +7,13 @@
 
 void handler_int(int s) {
 	printf("\n ricevuto segnale SIGTERM \n");
-	signal(SIGTERM, SIG_DFL);
+	signal(SIGTERM, SIG_IGN);
 }
 
 int main(int argc, char *argv[]) {
 	int i;
 
-  printf("Id processo: %d\n",getpid());
+  	printf("Id processo: %d\n",getpid());
 
 	// associazione segnale-handler
 	if (signal(SIGTERM, handler_int)==SIG_ERR) {
