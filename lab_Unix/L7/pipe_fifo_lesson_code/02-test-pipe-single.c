@@ -52,7 +52,7 @@ int main (void) {
       TEST_ERROR;
     }
 
-		sleep(10);
+	sleep(5);
 
     // Now the write end can be closed as well
     close(my_pipe[1]);
@@ -74,11 +74,11 @@ int main (void) {
     TEST_ERROR;
 
     while (num_bytes = read(my_pipe[0], buf, READ_BUF_SIZE)) {
-      //      write(STDOUT_FILENO, "X", 1);
-      write(STDOUT_FILENO, buf, num_bytes);
-      //sleep(1);
-			printf("waiting for data...\n");
-      TEST_ERROR;
+      	//write(STDOUT_FILENO, "X", 1);
+      	write(STDOUT_FILENO, buf, num_bytes);
+      	//sleep(1);
+		printf("waiting for data...\n");
+      	TEST_ERROR;
     }
     break;
   }

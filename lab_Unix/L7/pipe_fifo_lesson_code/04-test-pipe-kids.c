@@ -8,7 +8,7 @@
 #include <string.h>
 
 #define NUM_PROC      10
-#define NUM_ITER      20
+#define NUM_ITER      10
 #define READ_BUF_SIZE 100        // try varying this
 #define TEST_ERROR    if (errno) {fprintf(stderr, \
 					   "%s:%d: PID=%5d: Error %d (%s)\n",\
@@ -45,9 +45,9 @@ int main (void) {
         sleep(1);
 
 	      for(j=0; j<NUM_ITER; j++) {
-					dprintf(my_pipe[1], "CHILD PID %5d: j=%2d\n", getpid(), j);
-          sleep(1);
-					TEST_ERROR;
+				dprintf(my_pipe[1], "CHILD PID %5d: j=%2d\n", getpid(), j);
+          		sleep(1);
+				TEST_ERROR;
 	      }
 
 	      // Now the write end can be closed as well

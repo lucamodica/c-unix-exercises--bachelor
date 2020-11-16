@@ -13,7 +13,7 @@ int main() {
 
   memset(buffer, '\0', sizeof(buffer));
 
-  printf("La dimensione del buffer della pipe è di %d butes\n", PIPE_BUF);
+  printf("La dimensione del buffer della pipe è di %d bytes\n", PIPE_BUF);
 
   if (pipe(file_pipes) == 0) {
     fork_result = fork();
