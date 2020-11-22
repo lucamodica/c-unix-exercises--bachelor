@@ -13,8 +13,7 @@
 
 /* Creates a client that writes to a FIFO named argv[1] the message
    argv[2] plus other client info */
-int main(int argc, char * argv[])
-{
+int main(int argc, char * argv[]){
   int fifo_fd, str_len;
   char my_msg[BUF_SIZE];
   ssize_t num_bytes;
