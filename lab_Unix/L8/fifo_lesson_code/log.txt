@@ -1,0 +1,3 @@
+06-test-fifo-client.c:PID=12954: "im_mondo_che_ci_incula_sborra_diagonalmente_mentre_dozer_mincula_nÿuovamente_cemento"
+.c:PID=12954: "im_mondo_che_ci_incula_sborra_diagonalmente_mentre_dozer_mincula_nÿ06-test-fifo-client.c:PID=12975: "im_mondo_che_ci_incula_sborra_diagonalmente_mentre_dozer_mincula_nÿuovamente_cemento"
+.c:PID=12975: "im_mondo_che_ci_incula_sborra_diagonalmente_mentre_dozer_mincula_nÿ

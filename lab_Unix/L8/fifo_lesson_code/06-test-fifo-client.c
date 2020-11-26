@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-#define BUF_SIZE    100
+#define BUF_SIZE    1000
 
 /*
   (1) gcc test-fifo-client.c -o test-fifo-client
