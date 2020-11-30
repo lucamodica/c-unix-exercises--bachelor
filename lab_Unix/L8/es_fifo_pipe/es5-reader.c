@@ -27,7 +27,7 @@ int main(int argc, char * argv[]){
   while (num_bytes = read(fifo_fd, readbuf, BUF_SIZE)) {
     printf("Received a message of %d bytes: %s\n",num_bytes,readbuf);
     fprintf(log,"%s",readbuf);
-	memset(readbuf,'\0',sizeof(readbuf));
+	  memset(readbuf,'\0',sizeof(readbuf));
   }
 
   close(fifo_fd);

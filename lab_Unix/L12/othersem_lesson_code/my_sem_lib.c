@@ -21,7 +21,6 @@ int sem_set_val(int sem_id, int sem_num, int sem_val) {
 /* Try to access the resource */
 int sem_reserve(int sem_id, int sem_num) {
 	struct sembuf sops;
-	
 	sops.sem_num = sem_num;
 	sops.sem_op = -1;
 	sops.sem_flg = 0;
