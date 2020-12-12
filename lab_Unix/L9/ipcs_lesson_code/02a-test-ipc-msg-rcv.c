@@ -1,8 +1,7 @@
 #include "ipc-msg-common.h"
 
-
 void signal_handler(int signal) {
-	printf("Signal handler!\n");
+  printf("Signal handler!\n");
 }
 
 /*
@@ -12,79 +11,80 @@ void signal_handler(int signal) {
  */
 int main(int argc, char * argv[])
 {
-	int q_id;
-	struct msgbuf my_msg;
-	int num_bytes;
-	long rcv_type;
+  int q_id;
+  struct msgbuf my_msg;
+  int num_bytes;
+  long rcv_type;
 
-	struct sigaction sa;
-	sigset_t  my_mask;
+  struct sigaction sa;
+  sigset_t  my_mask;
 
 
-	if (argc <= 1) {
-		fprintf(stderr, "Must specify an integer to select the type of message to receive\n");
-		return(-1);
-	}
+  if (argc <= 1) {
+    fprintf(stderr, "Must specify an integer to select the type of message to receive\n");
+    return(-1);
+  }
 
-	printf("[%d] Waiting for messages....\n",getpid());
+  printf("[%d] Waiting for messages....\n",getpid());
 
-	/*
-	 * Create a message queue if it does not exist. Just get its
-	 * ID if it exists already. The key MY_KEY is shared via a
-	 * common #define
-	 */
-	q_id = msgget(MY_KEY, IPC_CREAT | 0600);
-	TEST_ERROR;
+  /*
+   * Create a message queue if it does not exist. Just get its
+   * ID if it exists already. The key MY_KEY is shared via a
+   * common #define
+   */
+  q_id = msgget(MY_KEY, IPC_CREAT | 0600);
+  TEST_ERROR;
 
-	sa.sa_handler = signal_handler;
-	sa.sa_flags = 0;
-	sigemptyset(&my_mask);
-	sa.sa_mask = my_mask;
-	sigaction(SIGALRM, &sa, NULL);
-	sigaction(SIGINT, &sa, NULL);
+  sa.sa_handler = signal_handler;
+  sa.sa_flags = 0;
+  sigemptyset(&my_mask); // svuota totalmente mymask (>elenca tutti i tuoi segnali<)
+  sa.sa_mask = my_mask;
+  sigaction(SIGALRM, &sa, NULL); // Rimane in attesa di alarm 
+  sigaction(SIGINT, &sa, NULL); //  ================== di un Integer
 
-	alarm(5);
+  alarm(20);
 
-	rcv_type = atol(argv[1]);
-	while (1) {
-		/* now receiving the message */
-		num_bytes = msgrcv(q_id, &my_msg, MSG_LEN, rcv_type, 0);
-		//num_bytes = msgrcv(q_id, &my_msg, MSG_LEN, rcv_type, IPC_EXCEPT);
-		//num_bytes = msgrcv(q_id, &my_msg, MSG_LEN, rcv_type, IPC_NOWAIT);
+  rcv_type = atol(argv[1]);
+  while (1) {
+    /* now receiving the message */
+    num_bytes = msgrcv(q_id, &my_msg, MSG_LEN, rcv_type, 0);
+    //num_bytes = msgrcv(q_id, &my_msg, MSG_LEN, rcv_type, IPC_EXCEPT);
+    //num_bytes = msgrcv(q_id, &my_msg, MSG_LEN, rcv_type, IPC_NOWAIT);
 
-		if (num_bytes >= 0) {
-			/* received a good message (possibly of zero length) */
-			break;
-		}
+    if (num_bytes >= 0) {
+      /* received a good message (possibly of zero length) */
+      break;
+    }
 
-		printf("%d\n",errno);
+    //printf("%d\n",errno);
+    sleep(1);
 
-		/* now error handling */
-		if (errno == EINTR) {
-			fprintf(stderr, "(PID=%d): interrupted by a signal while waiting for a message of type %ld on Q_ID=%d. Trying again\n",
-				getpid(), rcv_type, q_id);
-			continue;
-		}
-		if (errno == EIDRM) {
-			printf("The Q_ID=%d was removed. Let's terminate\n", q_id);
-			exit(0);
-		}
-		if (errno == ENOMSG) {
-			printf("No message of type=%ld in Q_ID=%d. Not going to wait\n", rcv_type, q_id);
-			//continue;
-			exit(0);
-		}
-		
-	}
+    /* now error handling */
+    if (errno == EINTR) {
+      fprintf(stderr, "(PID=%d): interrupted by a signal while waiting for a message of type %ld on Q_ID=%d. Trying again\n",
+        getpid(), rcv_type, q_id);
+      continue;
+    }
+    if (errno == EIDRM) {
+      printf("The Q_ID=%d was removed. Let's terminate\n", q_id);
+      exit(0);
+    }
+    if (errno == ENOMSG) {
+      printf("No message of type=%ld in Q_ID=%d. Not going to wait\n", rcv_type, q_id);
+      //continue;
+      exit(0);
+    }
+    
+  }
 
-	printf("(PID=%d): Q_id=%d: msg type=%ld \"%s\" RECEIVED\n",
-	       getpid(), q_id, my_msg.mtype, my_msg.mtext);
+  printf("(PID=%d): Q_id=%d: msg type=%ld \"%s\" RECEIVED\n",
+         getpid(), q_id, my_msg.mtype, my_msg.mtext);
 
-	/* Check if special message received to erase the queue */
-	if (my_msg.mtype == MSGTYPE_RM) {
-		printf("Now removing the queue\n");
-		msgctl(q_id, IPC_RMID, NULL);
-	}
+  /* Check if special message received to erase the queue */
+  if (my_msg.mtype == MSGTYPE_RM) {
+    printf("Now removing the queue\n");
+    msgctl(q_id, IPC_RMID, NULL);
+  }
 
-	return(0);
+  return(0);
 }

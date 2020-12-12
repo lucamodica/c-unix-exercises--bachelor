@@ -8,7 +8,8 @@
 #include <sys/msg.h>
 #include <errno.h>
 #include <string.h>
-#include <signal.h> 
+#include <signal.h>
+
 
 #define TEST_ERROR    if (errno) {fprintf(stderr, \
 					  "%s:%d: PID=%5d: Error %d (%s)\n", \
