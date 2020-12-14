@@ -13,7 +13,7 @@
 
 #define NUM_PROC  5
 #define NUM_MSG  20
-#define MSG_MAX_SIZE     128
+#define MSG_MAX_SIZE  128
 #define TEST_ERROR    if (errno) {dprintf(STDERR_FILENO, \
 					   "%s:%d: PID=%5d: Error %d (%s)\n",\
 					   __FILE__,\
