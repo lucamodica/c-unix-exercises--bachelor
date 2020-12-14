@@ -29,7 +29,7 @@ struct msgbuf {
 };
 
 //Print queue status with useful informations
-void msg_print_stats(int q_id);
+void print_info_stats(int q_id);
 
 int main() {
 
@@ -73,7 +73,7 @@ int main() {
   exit(EXIT_SUCCESS);
 }
 
-
+//Print queue status with useful informations
 void print_info_stats(int q_id){
   struct msqid_ds stat;
   int ret_val;
