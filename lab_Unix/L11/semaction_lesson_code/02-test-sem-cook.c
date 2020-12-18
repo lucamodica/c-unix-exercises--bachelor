@@ -176,27 +176,27 @@ int main (void)
 			 * la funzione.
 			 */
 			switch (tipo) {
-			case 0:
-				make_pata_fritte();
-			case 1:
-				make_pata_fritte_subito();
-			case 2:
-				make_uovo_fritto();
-			case 3:
-				make_pasta_bianco();
-			case 4:
-				make_barbonara();
-			case 5:
-				make_frittata_pata();
-			case 6:
-				make_pata_fritte_presto();
-			default:
-				printf("RICETTA NON TROVATA!!!\n");
-				exit(EXIT_FAILURE);
-				/*
-				  make_pasta_pom();
-				  make_verdu_lesse();
-				*/
+				case 0:
+					make_pata_fritte();
+				case 1:
+					make_pata_fritte_subito();
+				case 2:
+					make_uovo_fritto();
+				case 3:
+					make_pasta_bianco();
+				case 4:
+					make_barbonara();
+				case 5:
+					make_frittata_pata();
+				case 6:
+					make_pata_fritte_presto();
+				default:
+					printf("RICETTA NON TROVATA!!!\n");
+					exit(EXIT_FAILURE);
+					/*
+					make_pasta_pom();
+					make_verdu_lesse();
+					*/
 			} /* switch tipo ricetta */
 			break;
 		default:
@@ -564,7 +564,7 @@ void make_pata_fritte_subito()
 
 	struct sembuf sops[3];
 	
-	/* Setting all sem_flg to zero in one shot */;
+	/* Setting all sem_flg to zero in one shot */
 	bzero(sops,sizeof(sops));
 	sops[0].sem_num = ID_PADELLA;
 	sops[0].sem_op = -1;

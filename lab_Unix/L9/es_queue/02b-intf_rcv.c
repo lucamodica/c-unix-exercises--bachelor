@@ -31,7 +31,7 @@ int main() {
         if(rcv_bytes >= 0){ break; }
 
         //Handling errors
-        switch (rcv_bytes){
+        switch (errno){
             case EACCES:
                 printf("You don't have the permission to receive a message!!\n\n");
                 break;
@@ -52,12 +52,14 @@ int main() {
 
     printf("Received type %ld messages of %d bytes: %s.\n",type,rcv_bytes,rcv_msg.mtext);
 
+    printf("\nQUEUE STATS");
+    print_info_stats(q_id);
+
     //If mtype == MSGTYPE_RM, the queue will be also deallocated
     if(rcv_msg.mtype == MSGTYPE_RM){
         printf("This, is also an deallocated-type message! The queue #%d was also removed, bye.\n",q_id);
+        msgctl(q_id, IPC_RMID, NULL);
     }
     
-    
-
     exit(EXIT_SUCCESS);
 }
